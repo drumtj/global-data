@@ -104,7 +104,7 @@ const config = {
 
 // module.exports = config;
 //
-let pfh = `(function webpackUniversalModuleDefinition(root, factory) {
+let pfh = `debugger;(function webpackUniversalModuleDefinition(root, factory) {
   if(typeof exports === 'object' && typeof module === 'object')
     module.exports = factory();
   else if(typeof define === 'function' && define.amd)
@@ -149,7 +149,7 @@ globalCfg.plugins = [
   }),
 ]
 
-module.exports = [ umdCfg, globalCfg ];
+module.exports = [ umdCfg ];//, globalCfg ];
 
 //
 // let amdCfg = Object.assign({}, config);
