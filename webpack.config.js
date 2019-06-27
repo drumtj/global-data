@@ -28,7 +28,7 @@ const config = {
   , output: {
     path: path.join(__dirname, "dist"),
     library: 'GlobalData',
-    libraryTarget: "umd",
+    libraryTarget: "umd2",
     filename: "./global-data.js"
   }
   // ,output: {
