@@ -104,15 +104,18 @@ const config = {
 
 // module.exports = config;
 //
-let pfh = `debugger;(function webpackUniversalModuleDefinition(root, factory) {
+let pfh = `(function webpackUniversalModuleDefinition(root, factory) {
   if(typeof exports === 'object' && typeof module === 'object')
     module.exports = factory();
   else if(typeof define === 'function' && define.amd)
     define([], factory);
   else if(typeof exports === 'object')
     exports['MyLibrary'] = factory();
-  else
-    root['MyLibrary'] = factory().default;
+  else{
+    root['MyLibrary'] = factory();//.default;
+    console.error(root['MyLibrary']);
+    debugger;
+  }
 })(typeof self !== 'undefined' ? self : this, function() {
   return `.replace(/MyLibrary/g, 'GlobalData');
 let pff = `\n})`
