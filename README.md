@@ -15,7 +15,7 @@ data share between class and data watch
 Using npm:
 
 ```bash
-$ npm install "@drumtj/global-data"
+$ npm install @drumtj/global-data
 ```
 
 Using cdn:
