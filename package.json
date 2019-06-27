@@ -5,7 +5,7 @@
   "main": "./dist/global-data.js",
   "scripts": {
     "build": "webpack -p",
-    "npm_deploy": "git add . && git commit -m 'deploy' && npm run build && npm version patch && npm run git_deploy && npm publish",
+    "npm_deploy": "git add . && git commit -m 'deploy' && npm run build && npm version patch && npm publish",
     "git_deploy": "git add . && git commit -m 'deploy' && git push origin master",
     "deploy_test": "git add -A && git commit -m 'deploy' && git pull origin master --allow-unrelated-histories && git push origin master",
     "_deploy": "git add -f dist && git commit -m 'deploy' && git push origin `git subtree split --prefix dist master`:gh-pages --force && git rm -r dist && git commit -m 'cleanup deploy'",
