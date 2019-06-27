@@ -25,31 +25,28 @@ const config = {
   },
   cache: true,
   devtool: "source-map"
-  , output: {
-    path: path.join(__dirname, "dist"),
-    library: 'GlobalData',
-    libraryTarget: "umd2",
-    filename: "./global-data.js"
-  }
-  // ,output: {
-  //   library: {
-  //     root: 'GlobalData',
-  //     amd: 'a',
-  //     commonjs: 'b'
-  //   },
-  //   libraryTarget: 'umd'
-  // }
 };
 
-module.exports = config;
+// module.exports = config;
 
-// let umdCfg = Object.assign({}, config);
-// umdCfg.output = {
-//   path: path.join(__dirname, "dist"),
-//   library: 'GlobalData',
-//   libraryTarget: "umd",
-//   filename: "./global-data.js"
-// }
+let umdCfg = Object.assign({}, config);
+umdCfg.output = {
+  path: path.join(__dirname, "dist"),
+  library: 'GlobalData',
+  libraryTarget: "umd",
+  filename: "./global-data.js"
+}
+
+let globalCfg = Object.assign({}, config);
+globalCfg.output = {
+  path: path.join(__dirname, "dist"),
+  library: 'GlobalData',
+  libraryTarget: "var",
+  filename: "./global-data.var.js"
+}
+
+module.exports = [ umdCfg, globalCfg ];
+
 //
 // let amdCfg = Object.assign({}, config);
 // amdCfg.output = {
