@@ -103,22 +103,7 @@ const config = {
 };
 
 // module.exports = config;
-
-let umdCfg = Object.assign({}, config);
-umdCfg.output = {
-  path: path.join(__dirname, "dist"),
-  library: 'GlobalData',
-  libraryTarget: "umd",
-  filename: "./global-data.js"
-}
-
-let globalCfg = Object.assign({}, config);
-globalCfg.output = {
-  path: path.join(__dirname, "dist"),
-  library: 'GlobalData',
-  libraryTarget: "window",
-  filename: "./global-data.var.js"
-}
+//
 let pfh = `(function webpackUniversalModuleDefinition(root, factory) {
   if(typeof exports === 'object' && typeof module === 'object')
     module.exports = factory();
@@ -132,23 +117,35 @@ let pfh = `(function webpackUniversalModuleDefinition(root, factory) {
   return `.replace(/MyLibrary/g, 'GlobalData');
 let pff = `\n})`
 
+let umdCfg = Object.assign({}, config);
+umdCfg.output = {
+  path: path.join(__dirname, "dist"),
+  library: 'GlobalData',
+  libraryTarget: "umd",
+  filename: "./global-data.js"
+}
+umdCfg.plugins = [
+  new WrapperPlugin({
+    test: /\.js$/,
+    header: pfh,
+    footer: pff
+  }),
+]
+
+let globalCfg = Object.assign({}, config);
+globalCfg.output = {
+  path: path.join(__dirname, "dist"),
+  library: 'GlobalData',
+  libraryTarget: "window",
+  filename: "./global-data.var.js"
+}
+
+
 globalCfg.plugins = [
   new WrapperPlugin({
     test: /\.js$/,
     header: pfh,
     footer: pff
-    // header: ('(function umdWrapper(root, factory) {' +
-    //   '  if(typeof exports === "object" && typeof module === "object")' +
-    //   '    module.exports = factory().default;' +
-    //   '  else if(typeof define === "function" && define.amd)' +
-    //   '    define("NAME", [], function() { return factory().default; });' +
-    //   '  else if(typeof exports === "object")' +
-    //   '    exports["NAME"] = factory().default;' +
-    //   '  else' +
-    //   '    root["NAME"] = factory().default;' +
-    //   '})(this, function() {' +
-    //   'return ').replace(/NAME/g, 'GlobalData'), // this is the name of the lib
-    // footer: '\n})',
   }),
 ]
 
