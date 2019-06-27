@@ -1,0 +1,47 @@
+{
+  "name": "@drumtj/global-data",
+  "version": "1.0.18",
+  "description": "data share between class and data watch",
+  "main": "./dist/global-data.js",
+  "scripts": {
+    "build": "webpack -p",
+    "release": "npm run build && npm version patch -m \"Upgrade to %s for reasons\" && npm publish",
+    "deploy": "git add -f dist && git commit -m 'deploy' && git push origin `git subtree split --prefix dist master`:gh-pages --force && git rm -r dist && git commit -m 'cleanup deploy'",
+    "_release": "npm run build && npm run deploy"
+  },
+  "keywords": [
+    "data",
+    "watch",
+    "share",
+    "object",
+    "global"
+  ],
+  "homepage": "https://github.com/drumtj/global-data",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/drumtj/global-data.git"
+  },
+  "bugs": {
+    "url": "https://github.com/drumtj/global-data/issues",
+    "email": "drumtj@gmail.com"
+  },
+  "author": {
+    "name": "tj",
+    "email": "drumtj@gmail.com"
+  },
+  "engines": {
+    "node": ">= 0.4.0"
+  },
+  "contributors": [],
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.2.3",
+    "babel-loader": "^8.0.4",
+    "ts-loader": "^5.3.3",
+    "typescript": "^3.2.2",
+    "webpack": "^4.28.2",
+    "webpack-cli": "^3.1.2"
+  }
+}
