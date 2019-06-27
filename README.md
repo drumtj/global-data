@@ -21,7 +21,7 @@ $ npm install @drumtj/global-data
 Using cdn:
 
 ```html
-<script src="https://unpkg.com/@drumtj/global-data@1.0.51/dist/global-data.var.js"></script>
+<script src="https://unpkg.com/@drumtj/global-data@1.0.52/dist/global-data.var.js"></script>
 ```
 
 Using amd, commonjS Module

@@ -115,7 +115,7 @@ let pfh = `(function webpackUniversalModuleDefinition(root, factory) {
     root['MyLibrary'] = factory().default;
   }
 })(typeof self !== 'undefined' ? self : this, function() {
-  return `.replace(/MyLibrary/g, 'GlobalData');
+  return `.replace(/MyLibrary/g, 'GD');
 let pff = `\n})`
 
 let umdCfg = Object.assign({}, config);
