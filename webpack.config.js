@@ -77,7 +77,7 @@ class WrapperPlugin {
 //
 
 const config = {
-  mode: "devtool",//"production",// "none"
+  mode: "production", //"devtool",//"production",// "none"
   entry: "./lib/index.ts",
   resolve: {
     extensions: [".js", ".ts"]
@@ -112,9 +112,7 @@ let pfh = `(function webpackUniversalModuleDefinition(root, factory) {
   else if(typeof exports === 'object')
     exports['MyLibrary'] = factory();
   else{
-    root['MyLibrary'] = factory();//.default;
-    console.error(root['MyLibrary']);
-    debugger;
+    root['MyLibrary'] = factory().default;
   }
 })(typeof self !== 'undefined' ? self : this, function() {
   return `.replace(/MyLibrary/g, 'GlobalData');
@@ -127,13 +125,7 @@ umdCfg.output = {
   libraryTarget: "umd",
   filename: "./global-data.js"
 }
-umdCfg.plugins = [
-  new WrapperPlugin({
-    test: /\.js$/,
-    header: pfh,
-    footer: pff
-  }),
-]
+
 
 let globalCfg = Object.assign({}, config);
 globalCfg.output = {
@@ -142,8 +134,6 @@ globalCfg.output = {
   libraryTarget: "window",
   filename: "./global-data.var.js"
 }
-
-
 globalCfg.plugins = [
   new WrapperPlugin({
     test: /\.js$/,
@@ -152,7 +142,7 @@ globalCfg.plugins = [
   }),
 ]
 
-module.exports = [ umdCfg ];//, globalCfg ];
+module.exports = [ umdCfg, globalCfg ];
 
 //
 // let amdCfg = Object.assign({}, config);
