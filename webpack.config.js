@@ -130,7 +130,7 @@ umdCfg.output = {
 let globalCfg = Object.assign({}, config);
 globalCfg.output = {
   path: path.join(__dirname, "dist"),
-  library: 'GlobalData',
+  library: 'GD',
   libraryTarget: "window",
   filename: "./global-data.var.js"
 }
