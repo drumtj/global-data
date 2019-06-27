@@ -77,7 +77,7 @@ class WrapperPlugin {
 //
 
 const config = {
-  mode: "production",// "none"
+  mode: "devtool",//"production",// "none"
   entry: "./lib/index.ts",
   resolve: {
     extensions: [".js", ".ts"]
