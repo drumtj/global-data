@@ -1,5 +1,8 @@
 const path = require("path");
 const webpack = require("webpack");
+// const WrapperPlugin = require('./WrapperPlugin');
+// const WrapperPlugin = require('wrapper-webpack-plugin');
+//
 const ConcatSource = require("webpack-sources").ConcatSource;
 const ModuleFilenameHelpers = require("webpack/lib/ModuleFilenameHelpers");
 
@@ -69,7 +72,9 @@ class WrapperPlugin {
 		}
 	}
 }
-// const WrapperPlugin = require('wrapper-webpack-plugin');
+
+//
+//
 
 const config = {
   mode: "production",// "none"
