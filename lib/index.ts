@@ -133,8 +133,8 @@ export default class GlobalData {
   //   console.error("ref", ref);
   //   console.error("callbackList", callbackList);
   // }
-  //test
-  
+  //test2
+
   static toJSON(domainOrObj){
     let obj;
     if(typeof domainOrObj === "string"){
