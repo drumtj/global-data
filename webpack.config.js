@@ -41,7 +41,7 @@ let globalCfg = Object.assign({}, config);
 globalCfg.output = {
   path: path.join(__dirname, "dist"),
   library: 'GlobalData',
-  libraryTarget: "window",
+  libraryTarget: "this",
   filename: "./global-data.var.js"
 }
 
