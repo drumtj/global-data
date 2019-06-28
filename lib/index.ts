@@ -2,11 +2,9 @@ let ref = {};
 let data = {};
 let callbackList = {};
 
-function joinKey(dkey, key){
-  return dkey + '_' + key;
-}
+const joinKey = (dkey:string, key:string) => dkey + '_' + key;
 
-function defineProperty(obj, key, value?){
+const defineProperty = (obj, key:string, value?:any):string => {
   let dkey = createDataKey(obj);
   let ckey = joinKey(dkey, key);
   if(value !== undefined){
@@ -14,29 +12,22 @@ function defineProperty(obj, key, value?){
   }
 
   Object.defineProperty(obj, key, {
-    set: function(v){
-      data[ckey] = v;
+    set: v => {
       if(callbackList[ckey]){
-        callbackList[ckey](v);
+        callbackList[ckey](data[ckey], v);
       }
+      data[ckey] = v;
     },
-    get: function(){
-      return data[ckey];
-    },
+    get: () => data[ckey],
     enumerable: true,
     configurable: true
   });
   return obj._datakey;
 }
 
-function checkDomain(domain){
-  if(!domain || typeof domain !== "string" || domain.indexOf("..") > -1){
-    return false;
-  }
-  return true;
-}
+const checkDomain = (domain:string):boolean => !(!domain || typeof domain !== "string" || domain.indexOf("..") > -1);
 
-function createDataKey(obj){
+const createDataKey = obj => {
   if(!obj._datakey){
     Object.defineProperty(obj, '_datakey', {
       value: Date.now(),
@@ -48,7 +39,7 @@ function createDataKey(obj){
   return obj._datakey;
 }
 
-function domainSpliter(domain){
+const domainSpliter = (domain:string):{dm:string; key:string} => {
   let i = domain.lastIndexOf('.');
   let dm, key;
   if(i == -1){
@@ -61,13 +52,11 @@ function domainSpliter(domain){
   return {dm, key};
 }
 
-
-function setPointer(domain:string, value):any{
+const setPointer = (domain:string, value:any):{obj:any; key:string} => {
   if(!checkDomain(domain)){
     throw new Error("wrong domain");
   }
-  let dsp = domainSpliter(domain);
-  let obj, key;
+  let obj, key, dsp = domainSpliter(domain);
   if(dsp.dm == ""){
     obj = ref;
   }else{
@@ -83,7 +72,7 @@ function setPointer(domain:string, value):any{
   };
 }
 
-function createPointer(domain:string):any{
+const createPointer = (domain:string):any => {
   if(domain === ""){
     //for root.  //ref
   }else if(!checkDomain(domain)){
@@ -99,7 +88,7 @@ function createPointer(domain:string):any{
   return p;
 }
 
-function getPointer(domain:string):any{
+const getPointer = (domain:string):any => {
   if(domain === undefined || domain === ""){
     return ref;
   }
@@ -133,24 +122,17 @@ export default class GlobalData {
   //   console.error("ref", ref);
   //   console.error("callbackList", callbackList);
   // }
-  //test2
 
-  static toJSON(domainOrObj){
-    let obj;
-    if(typeof domainOrObj === "string"){
-      obj = getPointer(domainOrObj);
-    }else{
-      obj = domainOrObj;
-    }
-
+  static toJSON(domain:string):string{
+    let obj = getPointer(domain);
     if(obj){
       return JSON.stringify(obj);
     }
     return null;
   }
 
-  static toObject(domainOrObj){
-    let json = GlobalData.toJSON(domainOrObj);
+  static toObject(domain:string):Object{
+    let json = GlobalData.toJSON(domain);
     if(json){
       return JSON.parse(json);
     }
@@ -175,8 +157,8 @@ export default class GlobalData {
     GlobalData.clearCallback();
   }
 
-  static watch(domainOrObj, key, callback){
-    let obj, dkey, ckey, tobj;
+  static watch(domainOrObj:string|Object, key:string, callback:(oldval:any, newval:any)=>void):Object{
+    let obj, dkey, ckey;
     if(domainOrObj === undefined || domainOrObj == ""){
       domainOrObj = ref;
     }else if(!domainOrObj){
@@ -205,17 +187,17 @@ export default class GlobalData {
     return obj;
   }
 
-  static create(domain:string){
+  static create(domain:string):any{
     return GlobalData.set(domain, {});
   }
 
-  static set(domain:string, value){
+  static set(domain:string, value:any):any{
     let obj = setPointer(domain, value);
     let dkey = defineProperty(obj.obj, obj.key, value);
     return value;
   }
 
-  static get(domain:string){
+  static get(domain:string):any{
     return getPointer(domain);
   }
 }
