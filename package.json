@@ -1,6 +1,6 @@
 {
   "name": "@drumtj/global-data",
-  "version": "1.0.56",
+  "version": "1.0.57",
   "description": "data share between class and data watch",
   "main": "./dist/global-data.js",
   "scripts": {
@@ -18,7 +18,8 @@
     "share",
     "object",
     "global",
-    "global-data"
+    "global-data",
+    "observe"
   ],
   "homepage": "https://github.com/drumtj/global-data",
   "repository": {
