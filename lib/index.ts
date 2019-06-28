@@ -158,7 +158,7 @@ export default class GlobalData {
   }
 
   static watch(domainOrObj:string|Object, key:string, callback:(oldval:any, newval:any)=>void):Object{
-    let obj, dkey, ckey;
+    let obj, ckey;
     if(domainOrObj === undefined || domainOrObj == ""){
       domainOrObj = ref;
     }else if(!domainOrObj){
@@ -170,17 +170,14 @@ export default class GlobalData {
       if(obj === undefined){
         //기존에 없는값이니 생성
         obj = createPointer(domainOrObj);
-        dkey = defineProperty(obj, key);
-        ckey = joinKey(dkey, key);
+        ckey = joinKey(defineProperty(obj, key), key);
       }else{
         //기존에 있는값이니 데이터 유지
-        dkey = defineProperty(obj, key, obj[key]);
-        ckey = joinKey(dkey, key);
+        ckey = joinKey(defineProperty(obj, key, obj[key]), key);
       }
     }else{
       obj = domainOrObj;
-      dkey = defineProperty(obj, key, obj[key]);
-      ckey = joinKey(dkey, key);
+      ckey = joinKey(defineProperty(obj, key, obj[key]), key);
     }
 
     callbackList[ckey] = callback;
@@ -193,7 +190,7 @@ export default class GlobalData {
 
   static set(domain:string, value:any):any{
     let obj = setPointer(domain, value);
-    let dkey = defineProperty(obj.obj, obj.key, value);
+    defineProperty(obj.obj, obj.key, value);
     return value;
   }
 
