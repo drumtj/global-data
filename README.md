@@ -21,7 +21,7 @@ $ npm install @drumtj/global-data
 Using cdn:
 
 ```html
-<script src="https://unpkg.com/@drumtj/global-data@1.0.53/dist/global-data.var.js"></script>
+<script src="https://unpkg.com/@drumtj/global-data@1.0.54/dist/global-data.var.js"></script>
 ```
 
 Using amd, commonjS Module
@@ -39,7 +39,7 @@ import GD from '@drumtj/global-data';
 ##### GD.create(domain:string):object
 ##### GD.set(domain:string, value:any):any
 ##### GD.get(domain:string):any
-##### GD.watch(domainOrObj:string|object, watchPropertyName:string, callback:(value:any):void):object
+##### GD.watch(domainOrObj:string|object, watchPropertyName:string, callback:(oldValue:any,newValue:any):void):object
 ##### GD.clear()
 ##### GD.clearCallback()
 ##### GD.toJSON(domain:string):string
@@ -78,19 +78,19 @@ If you pass a domain string as the first argument, it uses the variable set in t
 
 ```js
 //watch for setted object
-GD.watch("editor.stage.options", 'x', function(value){
+GD.watch("editor.stage.options", 'x', function(oldValue, newValue){
   //something do it
 })
-GD.watch("editor.timeline", "bpm", function(value){
+GD.watch("editor.timeline", "bpm", function(oldValue, newValue){
   //something do it
 })
 
 //also you can watch any object
 var foo = {};
-GD.watch(foo, "bar", function(value){
-  console.log("setted bar:", value);
+GD.watch(foo, "bar", function(oldValue, newValue){
+  console.log("setted bar:", oldValue, newValue);
 })
-foo.bar = 10; // => output  'setted bar: 10'
+foo.bar = 10; // => output  'setted bar: undefined 10'
 ```
 
 Clear data and watch callback
