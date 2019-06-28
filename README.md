@@ -3,7 +3,7 @@
 [![npm version](https://img.shields.io/npm/v/@drumtj/global-data.svg?style=flat)](https://www.npmjs.com/package/@drumtj/global-data)
 [![license](https://img.shields.io/npm/l/@drumtj/global-data.svg)](#)
 
-data share between class and data watch
+data share between class and observe data
 
 ## Features
 
