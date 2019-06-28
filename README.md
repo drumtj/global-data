@@ -77,7 +77,7 @@ Watch data
 If you pass a domain string as the first argument, it uses the variable set in the domain, and creates a new variable if it does not exist.
 
 ```js
-//watch for setted object
+//Monitor when value is set
 GD.watch("editor.stage.options", 'x', function(oldValue, newValue){
   //something do it
   console.error("x", oldValue, newValue);
