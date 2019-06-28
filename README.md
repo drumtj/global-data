@@ -80,10 +80,19 @@ If you pass a domain string as the first argument, it uses the variable set in t
 //watch for setted object
 GD.watch("editor.stage.options", 'x', function(oldValue, newValue){
   //something do it
+  console.error("x", oldValue, newValue);
 })
 GD.watch("editor.timeline", "bpm", function(oldValue, newValue){
   //something do it
+  console.error("bpm", oldValue, newValue);
 })
+var editor = GD.get("editor");
+editor.stage.options.x = 2;
+editor.timeline.bpm = 120;
+
+//same
+GD.set("editor.stage.options", 2);
+GD.set("editor.timeline.bpm", 120);
 
 //also you can watch any object
 var foo = {};
