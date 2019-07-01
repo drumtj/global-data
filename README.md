@@ -91,7 +91,7 @@ editor.stage.options.x = 2;
 editor.timeline.bpm = 120;
 
 //same
-GD.set("editor.stage.options", 2);
+GD.set("editor.stage.options.x", 2);
 GD.set("editor.timeline.bpm", 120);
 
 //also you can watch any object
