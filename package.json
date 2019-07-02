@@ -5,7 +5,8 @@
   "main": "./dist/global-data.js",
   "scripts": {
     "build": "webpack -p",
-    "release": "npm run build && npm version patch --force && git push --tags origin master && npm publish && npm run deploy",
+    "release": "npm run build && npm run deploy && np --no-cleanup --yolo --no-release-draft",
+    "_release": "npm run build && npm version patch --force && git push --tags origin master && npm publish --access=public && npm run deploy",
     "deploy": "git add -A && git commit -m 'deploy' && git push origin master",
     "pull": "git pull origin master --allow-unrelated-histories",
     "deploy_test": "git add -A && git commit -m 'deploy' && git pull origin master --allow-unrelated-histories && git push origin master",

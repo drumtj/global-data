@@ -130,6 +130,7 @@ GD.toObject("editor.timeline");
 GD.toObject("editor");
 ```
 
+Please check the example folder for more [examples](https://github.com/drumtj/global-data/tree/master/examples).
 
 ## License
 
