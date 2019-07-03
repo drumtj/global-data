@@ -21,7 +21,7 @@ $ npm install @drumtj/global-data
 Using cdn:
 
 ```html
-<script src="https://unpkg.com/@drumtj/global-data@1.0.54/dist/global-data.var.js"></script>
+<script src="https://unpkg.com/@drumtj/global-data@1.0.64/dist/global-data.var.js"></script>
 ```
 
 Using amd, commonjS Module
@@ -130,7 +130,9 @@ GD.toObject("editor.timeline");
 GD.toObject("editor");
 ```
 
-Please check the example folder for more [examples](https://github.com/drumtj/global-data/tree/master/examples).
+examples ([source](https://github.com/drumtj/global-data/tree/master/examples))
+- [property watch](https://drumtj.github.io/global-data/watch.html)
+- [property watch2](https://drumtj.github.io/global-data/watch2.html)
 
 ## License
 

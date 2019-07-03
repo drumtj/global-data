@@ -16,15 +16,16 @@
     </style>
   </head>
   <body>
+    Click the box!
     <div id="item1" class="item"></div>
     <div id="item2" class="item"></div>
-    <script type="text/javascript" src="https://unpkg.com/@drumtj/global-data@1.0.54/dist/global-data.var.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/@drumtj/global-data@1.0.64/dist/global-data.var.js"></script>
     <script type="text/javascript">
       var stage = {
         selected: null
       }
 
-      GD.watch(stage, "selected", (oldValue, newValue)=>{
+      GD.watch(stage, "selected", (newValue, oldValue)=>{
         if (oldValue) {
           oldValue.classList.remove('selected');
         }

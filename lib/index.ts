@@ -1,8 +1,14 @@
 let ref = {};
 let data = {};
 let callbackList = {};
-
+let changeCallbackList = [];
 const joinKey = (dkey:string, key:string) => dkey + '_' + key;
+
+const changeCallback = (obj, key, nv, ov) => {
+  for(let i=0; i<changeCallbackList.length; i++){
+    changeCallbackList[i](obj, key, nv, ov);
+  }
+}
 
 const defineProperty = (obj, key:string, value?:any):string => {
   let dkey = createDataKey(obj);
@@ -14,7 +20,8 @@ const defineProperty = (obj, key:string, value?:any):string => {
   Object.defineProperty(obj, key, {
     set: v => {
       if(callbackList[ckey]){
-        callbackList[ckey](data[ckey], v);
+        callbackList[ckey](v, data[ckey]);
+        changeCallback(obj, ckey, v, data[ckey]);
       }
       data[ckey] = v;
     },
@@ -123,6 +130,18 @@ export default class GlobalData {
   //   console.error("callbackList", callbackList);
   // }
 
+  static addSomeChangeListener(callback){
+    changeCallbackList.push(callback);
+  }
+
+  static removeSomeChangeListener(callback){
+    for(let i=0; i<changeCallbackList.length; i++){
+      changeCallbackList[i] === callback;
+      changeCallbackList.splice(i, 1);
+      return;
+    }
+  }
+
   static toJSON(domain:string):string{
     let obj = getPointer(domain);
     if(obj){
@@ -157,7 +176,7 @@ export default class GlobalData {
     GlobalData.clearCallback();
   }
 
-  static watch(domainOrObj:string|Object, key:string, callback:(oldval:any, newval:any)=>void):Object{
+  static watch(domainOrObj:string|Object, key:string, callback:(newval:any, oldval:any)=>void):Object{
     let obj, ckey;
     if(domainOrObj === undefined || domainOrObj == ""){
       domainOrObj = ref;

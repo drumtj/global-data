@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <style media="screen">
+      #container {
+        position: relative;
+        border: 1px solid black;
+        border-radius: 5px;
+        width: 800px;
+        height: 400px;
+      }
+
+      .card {
+        position: absolute;
+        width: 80px;
+        height: 50px;
+        border: 4px dashed rgb(222, 53, 53);
+        border-radius: 20px;
+        background-color: rgb(232, 196, 181);
+        user-select: none;
+        padding: 10px;
+        font-size: 18px;
+      }
+
+    </style>
+    <title></title>
+  </head>
+  <body>
+    <div id="container">
+    </div>
+    <button onclick="doc.title=['hi', 'good mornning', 'test'][Math.floor(Math.random()*3)]">changeTitle</button>
+    <button onclick="doc.color='#'+Math.floor(Math.random()*0xffffff).toString(16)">changeBackground</button>
+    <button onclick="addCard('drag me', 'test')">addCard</button>
+    <br>
+
+    <textarea id="snapshot" rows="50" cols="80"></textarea>
+    <!-- <script type="text/javascript" src="../dist/global-data.var.js"></script> -->
+    <script type="text/javascript" src="https://unpkg.com/@drumtj/global-data@1.0.64/dist/global-data.var.js"></script>
+    <script type="text/javascript">
+      var doc = {
+        children: []
+      };
+      var globalZ = 0;
+      var container = document.getElementById("container");
+
+      GD.watch(doc, "title", v=>document.title=v);
+      GD.watch(doc, "color", v=>document.body.style.backgroundColor=v);
+      GD.addSomeChangeListener((obj, key, nv, ov)=>{
+        getSiteSnapshot();
+      })
+
+      function addCard(title, body){
+        var child = {};
+        doc.children.push(child);
+        var div = document.createElement("div");
+        div.classList.add("card");
+        div.textContent = "Drag me";
+        container.appendChild(div);
+        draggable(div, child);
+
+        GD.watch(child, "x", v=>div.style.left=v+"px");
+        GD.watch(child, "y", v=>div.style.top=v+"px");
+        GD.watch(child, "z", v=>div.style.zIndex=v);
+
+        child.x = Math.random() * 700;
+        child.y = Math.random() * 350;
+        child.z = globalZ++;
+      }
+
+      function draggable(el, obj){
+        el.onmousedown = function(e){
+          var x = e.pageX - el.offsetLeft;
+          var y = e.pageY - el.offsetTop;
+          obj.z = globalZ++;
+          document.body.onmousemove = function(e){
+            obj.x = e.pageX - x;
+            obj.y = e.pageY - y;
+          }
+        }
+        el.onmouseup = function(e){
+          document.body.onmousemove = null;
+        }
+      }
+
+      function getSiteSnapshot(){
+        document.getElementById("snapshot").value = JSON.stringify(doc, null, 4);
+      }
+    </script>
+  </body>
+</html>
