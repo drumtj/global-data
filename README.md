@@ -34,7 +34,7 @@ const GD = require('@drumtj/global-data');
 import GD from '@drumtj/global-data';
 ```
 
-### Instance methods
+### static methods
 
 ```ts
 GD.create(domain:String):Object
