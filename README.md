@@ -36,14 +36,36 @@ import GD from '@drumtj/global-data';
 
 ### Instance methods
 
-##### GD.create(domain:string):object
-##### GD.set(domain:string, value:any):any
-##### GD.get(domain:string):any
-##### GD.watch(domainOrObj:string|object, watchPropertyName:string, callback:(newValue:any, oldValue:any):void):object
-##### GD.clear()
-##### GD.clearCallback()
-##### GD.toJSON(domain:string):string
-##### GD.toObject(domain:string):object
+```ts
+GD.create(domain:String):Object
+```
+```ts
+GD.set(domain:String, value:any):any
+```
+```ts
+GD.get(domain:String):any
+```
+```ts
+GD.watch(domainOrObj:String|Object, watchPropertyName:String, callback:(newValue:any, oldValue:any):void):Object
+```
+```ts
+GD.clear()
+```
+```ts
+GD.clearCallback()
+```
+```ts
+GD.toJSON(domain:String):String
+```
+```ts
+GD.toObject(domain:String):Object
+```
+```ts
+GD.addSomeChangeListener(callback:(obj, key, newValue, oldValue):void)
+```
+```ts
+GD.removeSomeChangeListener(callback)
+```
 
 ## Example
 
