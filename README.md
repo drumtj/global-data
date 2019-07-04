@@ -39,7 +39,7 @@ import GD from '@drumtj/global-data';
 ##### GD.create(domain:string):object
 ##### GD.set(domain:string, value:any):any
 ##### GD.get(domain:string):any
-##### GD.watch(domainOrObj:string|object, watchPropertyName:string, callback:(oldValue:any,newValue:any):void):object
+##### GD.watch(domainOrObj:string|object, watchPropertyName:string, callback:(newValue:any, oldValue:any):void):object
 ##### GD.clear()
 ##### GD.clearCallback()
 ##### GD.toJSON(domain:string):string
@@ -78,11 +78,11 @@ If you pass a domain string as the first argument, it uses the variable set in t
 
 ```js
 //Monitor when value is set
-GD.watch("editor.stage.options", 'x', function(oldValue, newValue){
+GD.watch("editor.stage.options", 'x', function(newValue, oldValue){
   //something do it
   console.error("x", oldValue, newValue);
 })
-GD.watch("editor.timeline", "bpm", function(oldValue, newValue){
+GD.watch("editor.timeline", "bpm", function(newValue, oldValue){
   //something do it
   console.error("bpm", oldValue, newValue);
 })
@@ -96,7 +96,7 @@ GD.set("editor.timeline.bpm", 120);
 
 //also you can watch any object
 var foo = {};
-GD.watch(foo, "bar", function(oldValue, newValue){
+GD.watch(foo, "bar", function(newValue, oldValue){
   console.log("setted bar:", oldValue, newValue);
 })
 foo.bar = 10; // => output  'setted bar: undefined 10'
@@ -112,6 +112,17 @@ Clear only watch callback
 
 ```js
 GD.clearCallback();
+```
+
+add listener to be called when some property changes.
+
+```js
+function onChanged(obj, key, newValue, oldValue){
+  //
+}
+GD.addSomeChangeListener(onChanged);
+
+GD.removeSomeChangeListener(onChanged);
 ```
 
 get json
