@@ -113,7 +113,7 @@ const getPointer = (domain:string):any => {
   let arr = domain.split('.');
   for(let i=0; i<arr.length; i++){
     if(!arr[i]) continue;
-    if(!p[arr[i]]) return undefined;
+    if(p[arr[i]] === undefined) return undefined;
     p = p[arr[i]];
   }
   return p;
