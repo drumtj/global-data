@@ -106,11 +106,11 @@ const config = {
 //
 let pfh = `(function webpackUniversalModuleDefinition(root, factory) {
   if(typeof exports === 'object' && typeof module === 'object')
-    module.exports = factory();
+    module.exports = factory().default;
   else if(typeof define === 'function' && define.amd)
     define([], factory);
   else if(typeof exports === 'object')
-    exports['MyLibrary'] = factory();
+    exports['MyLibrary'] = factory().default;
   else{
     root['MyLibrary'] = factory().default;
   }
@@ -118,13 +118,13 @@ let pfh = `(function webpackUniversalModuleDefinition(root, factory) {
   return `.replace(/MyLibrary/g, 'GD');
 let pff = `\n})`
 
-let umdCfg = Object.assign({}, config);
-umdCfg.output = {
-  path: path.join(__dirname, "dist"),
-  library: 'GlobalData',
-  libraryTarget: "umd",
-  filename: "./global-data.js"
-}
+// let umdCfg = Object.assign({}, config);
+// umdCfg.output = {
+//   path: path.join(__dirname, "dist"),
+//   library: 'GlobalData',
+//   libraryTarget: "umd",
+//   filename: "./global-data.js"
+// }
 
 
 let globalCfg = Object.assign({}, config);
@@ -142,7 +142,8 @@ globalCfg.plugins = [
   }),
 ]
 
-module.exports = [ umdCfg, globalCfg ];
+// module.exports = [ umdCfg, globalCfg ];
+module.exports = [ globalCfg ];
 
 //
 // let amdCfg = Object.assign({}, config);

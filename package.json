@@ -2,7 +2,7 @@
   "name": "@drumtj/global-data",
   "version": "1.0.68",
   "description": "data share between class and data watch",
-  "main": "./dist/global-data.js",
+  "main": "./dist/global-data.var.js",
   "scripts": {
     "build": "webpack -p",
     "release": "npm run build && npm run deploy && np --no-cleanup --yolo --no-release-draft",
