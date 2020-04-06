@@ -99,7 +99,7 @@ Watch data
 If you pass a domain string as the first argument, it uses the variable set in the domain, and creates a new variable if it does not exist.
 
 ```js
-//Monitor when value is set
+// monitoring when setting values
 GD.watch("editor.stage.options", 'x', function(newValue, oldValue){
   //something do it
   console.error("x", oldValue, newValue);
@@ -116,7 +116,7 @@ editor.timeline.bpm = 120;
 GD.set("editor.stage.options.x", 2);
 GD.set("editor.timeline.bpm", 120);
 
-//also you can watch any object
+// you can also use externally declared variables.
 var foo = {};
 GD.watch(foo, "bar", function(newValue, oldValue){
   console.log("setted bar:", oldValue, newValue);
@@ -136,7 +136,7 @@ Clear only watch callback
 GD.clearCallback();
 ```
 
-add listener to be called when some property changes.
+add a listener to call when some property changes.
 
 ```js
 function onChanged(obj, key, newValue, oldValue){
